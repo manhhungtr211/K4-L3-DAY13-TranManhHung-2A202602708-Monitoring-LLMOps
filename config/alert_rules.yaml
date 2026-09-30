@@ -1,25 +1,25 @@
 alerts:
-  - name: TODO_alert_1
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: HighLatencyP99
+    severity: high
+    condition: latency_p99 > 3000ms
+    duration: 5m
     type: symptom-based
-    channel: slack
-    owner: TODO
+    channel: "#k4-l3b-alerts-latency"
+    owner: SRE_Team
     runbook: docs/alerts.md#alert-1
-  - name: TODO_alert_2
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: HighErrorRate
+    severity: critical
+    condition: error_rate > 5%
+    duration: 5m
     type: symptom-based
-    channel: slack
-    owner: TODO
+    channel: "#k4-l3b-alerts-platform"
+    owner: Platform_Team
     runbook: docs/alerts.md#alert-2
-  - name: TODO_alert_3
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: LowResponseQuality
+    severity: medium
+    condition: quality_score_p50 < 0.6
+    duration: 15m
     type: symptom-based
-    channel: slack
-    owner: TODO
+    channel: "#k4-l3b-alerts-ai"
+    owner: AI_Engineering_Team
     runbook: docs/alerts.md#alert-3

@@ -7,7 +7,20 @@ primary_slo:
     total_event: 'event == "request_received"'
   target_percent: 99.5
   error_budget_percent: 0.5
-  note: Học viên phải giải thích hoặc điều chỉnh ngưỡng bằng baseline của mình. Ví dụ nếu có 10,000 request trong cửa sổ 28 ngày, error budget 0.5% nghĩa là tối đa 50 request được phép không đạt SLO.
+  baseline_metrics:
+    latency_p50_ms: 500
+    latency_p95_ms: 1363
+    latency_p99_ms: 1443
+    avg_quality_score: 0.86
+    retrieval_success_rate_pct: 100
+  note: >
+    Dựa trên baseline thực tế của hệ thống (Latency P50 ≈ 500ms, P95 ≈ 1363ms < 2000ms, Quality score trung bình 0.86),
+    ngưỡng latency_ms <= 3000ms là phù hợp để đảm bảo trải nghiệm người dùng phản hồi nhanh, đồng thời phát hiện kịp thời các bất thường (như incident rag_slow gây trễ > 2500ms).
+    Với mục tiêu SLO 99.5% trong cửa sổ 28 ngày:
+    Error budget = 100% - 99.5% = 0.5%.
+    Nếu workload phục vụ 10,000 requests trong 28 ngày thì số request tối đa được phép chậm (> 3000ms) hoặc thất bại là:
+    10,000 * 0.5% = 50 requests.
+    Nếu vượt quá 50 requests bị lỗi/chậm, error budget bị cạn kiệt (burn rate > 1.0) và nhóm kỹ thuật phải tạm dừng phát hành tính năng mới để tập trung cải thiện độ ổn định.
 guardrails:
   error_rate_pct_max: 2
   daily_cost_usd_max: 2.5
