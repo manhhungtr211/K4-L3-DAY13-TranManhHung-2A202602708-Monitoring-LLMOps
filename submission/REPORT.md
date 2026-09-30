@@ -37,9 +37,9 @@
 
 | Nội dung | Baseline | Kết quả cuối | Nhận xét |
 |---|---|---|---|
-| `validate_logs.py` | | | |
-| `validate_dashboard.py` | | | |
-| `pytest` | | | |
+| `validate_logs.py` | Error: data\logs.jsonl not found | 100/100 | Đã hoàn thành cấu hình structlog và PII scrubbing |
+| `validate_dashboard.py` | HỢP LỆ: 6/6 panel có trong dashboard contract | HỢP LỆ: 6/6 panel | Không có thay đổi |
+| `pytest` | 2 errors (ModuleNotFoundError) | 22 passed | Đã fix pydantic và các TODO của CP1 |
 | Số traces hợp lệ | | | |
 | Số PII leak | | | |
 | Latency P95 / TTFT P95 | | | |
